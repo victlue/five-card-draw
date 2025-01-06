@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Five-Card Draw Poker</title>
+  <script src="/static/script.js"></script>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 20px;
+      background-color: #f0f0f0;
+    }
+
+    /* Buttons: black with hover effect */
+    button {
+      padding: 8px 12px;
+      border: none;
+      border-radius: 4px;
+      margin: 4px;
+      cursor: pointer;
+      background-color: #000;  /* black */
+      color: #fff;
+      font-size: 14px;
+    }
+    button:hover {
+      background-color: #333;
+    }
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    #header {
+      display: none; /* hidden until game starts */
+      margin-bottom: 1em;
+    }
+
+    #header h1 {
+      margin: 0;
+      padding: 0;
+    }
+
+    .cards {
+      display: flex;
+      gap: 5px;
+      margin-bottom: 1em;
+    }
+    .card {
+      border: 1px solid #333;
+      padding: 8px;
+      width: 40px;
+      text-align: center;
+      border-radius: 4px;
+      background-color: #fff;
+      font-weight: bold;
+    }
+
+    #tableContainer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-top: 1em;
+    }
+
+    #playerArea, #computerArea {
+      width: 30%;
+      padding: 10px;
+      border: 1px solid #aaa;
+      background-color: #fff;
+      border-radius: 5px;
+    }
+    #centerArea {
+      width: 25%;
+      text-align: center;
+      padding: 10px;
+      border: 1px solid #aaa;
+      background-color: #fff;
+      border-radius: 5px;
+    }
+
+    .chipPile {
+      display: flex;
+      flex-wrap: wrap;
+      width: 80px;
+      min-height: 10px;
+      margin-bottom: 1em;
+    }
+    .chip {
+      width: 8px;
+      height: 8px;
+      margin: 1px;
+      border-radius: 50%;
+      background-color: red;
+    }
+
+    .controls {
+      margin-top: 1em;
+    }
+
+    .activeSide {
+      background-color: #ffd9d9;
+    }
+
+    /* Quit Game at bottom */
+    #footer {
+      margin-top: 2em;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header is hidden until game starts -->
+  <div id="header">
+    <h1>Five-Card Draw Poker</h1>
+    <div><strong>Round:</strong> <span id="roundNum"></span></div>
+  </div>
+
+  <!-- Pre-game screen -->
+  <div id="preGame">
+    <button id="startGameBtn">Start New Game</button>
+  </div>
+
+  <!-- Main interface -->
+  <div id="gameInterface" style="display: none;">
+    <div>
+      <button id="nextRoundBtn">Next Round</button>
+    </div>
+    <div id="status" style="margin: 1em 0; font-weight: bold;"></div>
+
+    <div id="tableContainer">
+      <!-- Player area -->
+      <div id="playerArea">
+        <h3>Player (<span id="playerChipsNum"></span> chips)</h3>
+        <div id="playerChipPile" class="chipPile"></div>
+        <div id="playerCards" class="cards"></div>
+
+        <div class="controls" id="betControls">
+          <button id="playerCheckBtn">Check</button>
+          <button id="playerCallBtn">Call</button>
+          <button id="playerFoldBtn">Fold</button>
+          <input type="number" id="playerRaiseAmount" placeholder="Bet/Raise" />
+          <button id="playerRaiseBtn">Bet/Raise</button>
+        </div>
+
+        <div class="controls" id="discardControls">
+          <label>Discard (comma indices): </label>
+          <input type="text" id="discardIndices" placeholder="e.g. 0,3" />
+          <button id="playerDiscardBtn">Discard/Draw</button>
+        </div>
+      </div>
+
+      <!-- Pot in center -->
+      <div id="centerArea">
+        <h2>Pot: <span id="pot"></span></h2>
+        <div id="potChipPile" class="chipPile"></div>
+      </div>
+
+      <!-- Computer area -->
+      <div id="computerArea">
+        <h3>Computer (<span id="computerChipsNum"></span> chips)</h3>
+        <div id="computerChipPile" class="chipPile"></div>
+        <div id="computerCards" class="cards"></div>
+      </div>
+    </div>
+
+    <!-- Quit button at bottom -->
+    <div id="footer">
+      <button id="quitGameBtn">Quit Game</button>
+    </div>
+  </div>
+</body>
+</html>
