@@ -13,7 +13,6 @@ This is a simple **Five-Card Draw** poker web app where a single player competes
 - **Hides the computer’s cards** until the **round ends**, then reveals them.
 - **Alternate first-turn** each round (player goes first in round 1, computer in round 2, etc.).
 - **Player** and **Computer** each start with **100 chips**.
-- **Easy to customize** or expand.
 
 ## Project Structure
 ```
